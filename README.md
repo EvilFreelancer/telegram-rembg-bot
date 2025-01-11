@@ -8,7 +8,7 @@ Try this bot in action [here](https://t.me/deletebg_bot).
 
 ## Features
 
-* Supports commands like `/start` and `/info`
+* Supports commands like `/start`, `/info`, `mode_file` and `mode_sticker`
 * Removes the background from images sent by users
 * Tracks the number of images processed per user
 
@@ -74,6 +74,8 @@ The bot is now running and connected to the rembg API.
 
 * `/start` - registers the user and displays a welcome message
 * `/info` - shows the number of images processed by the user
+* `mode_file` - returns images without background as document (default)
+* `mode_sticker` - returns images without background as sticker
 * Upload an image to remove its background
 
 ## License

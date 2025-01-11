@@ -48,6 +48,7 @@ class UserModel(Base):
     is_active = Column(Boolean, default=True)
     createdAt = Column(DateTime, default=func.now(), nullable=False)
     updatedAt = Column(DateTime, default=func.now(), onupdate=func.now(), nullable=False)
+    mode = Column(String(50), default="file", nullable=False)
 
 
 # Build database schema
@@ -80,6 +81,34 @@ async def rembg(file_id: str) -> bytes:
                 return await response.read()
             else:
                 raise Exception("Ошибка при удалении фона.")
+
+
+@dp.message(Command("mode_file"))
+async def mode_file_command(message: Message):
+    chat_id = message.chat.id
+    user = session.query(UserModel).filter_by(chat_id=str(chat_id)).first()
+    if not user:
+        user = UserModel(chat_id=str(chat_id), mode="file")
+        session.add(user)
+    else:
+        user.mode = "file"
+        user.updated_at = datetime.datetime.now(datetime.UTC)
+    session.commit()
+    await message.answer("Теперь бот будет отвечать обработанным файлом.")
+
+
+@dp.message(Command("mode_sticker"))
+async def mode_sticker_command(message: Message):
+    chat_id = message.chat.id
+    user = session.query(UserModel).filter_by(chat_id=str(chat_id)).first()
+    if not user:
+        user = UserModel(chat_id=str(chat_id), mode="sticker")
+        session.add(user)
+    else:
+        user.mode = "sticker"
+        user.updated_at = datetime.datetime.now(datetime.UTC)
+    session.commit()
+    await message.answer("Теперь бот будет отвечать обработанным изображением в виде стикера.")
 
 
 @dp.message(Command("start"))
@@ -129,7 +158,11 @@ async def handle_image(message: Message):
         session.commit()
 
         file_name = f"processed_{user.processed}.png"
-        await message.answer_document(BufferedInputFile(processed_image, file_name))
+
+        if user.mode == "file":
+            await message.answer_document(BufferedInputFile(processed_image, file_name))
+        elif user.mode == "sticker":
+            await message.answer_sticker(BufferedInputFile(processed_image, file_name))
     except Exception as e:
         print(e)
         await message.answer("Произошла ошибка при обработке изображения. Попробуйте позже.")
