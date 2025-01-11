@@ -35,12 +35,8 @@ services:
       - "127.0.0.1:3306:3306"
     volumes:
       - ./mariadb_data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root_pass
-      - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE=rembg
-      - MYSQL_USER=rembg_user
-      - MYSQL_PASSWORD=rembg_pass
+    env_file:
+      - .env
     logging:
       driver: "json-file"
       options:
