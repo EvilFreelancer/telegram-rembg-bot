@@ -19,8 +19,6 @@ services:
     build: .
     env_file:
       - .env
-    volumes:
-      - .:/app
     depends_on:
       - rembg
       - mariadb
