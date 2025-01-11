@@ -1,6 +1,5 @@
 /.idea/
 /venv/
 /.env
-/rembg_data/
-/mariadb_data/
+/*_data/
 /docker-compose.yml
