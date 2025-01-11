@@ -27,6 +27,12 @@ git clone https://github.com/EvilFreelancer/telegram-rembg-bot.git
 cd telegram-rembg-bot
 ```
 
+Copy compose configuration:
+
+```shell
+cp docker-compose.dist.yml docker-compose.yml
+```
+
 Set up your environment variables by creating a `.env` file and populating it with the following:
 
 ```
