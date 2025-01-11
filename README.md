@@ -37,21 +37,21 @@ Set up your environment variables by creating a `.env` file and populating it wi
 
 ```
 # Telegram bot settings
-TELEGRAM_BOT_TOKEN=5907334639:AAEi2VlsWoGo2c9mBN08tLUQZ0Mwv5MGPcs
+TELEGRAM_BOT_TOKEN=123:asdzxc
 TELEGRAM_BOT_REMBG_URL="http://rembg:7000/api/remove?url="
 TELEGRAM_BOT_DB_HOSTNAME=mariadb
 TELEGRAM_BOT_DB_PORT=3306
 TELEGRAM_BOT_DB_DBNAME=rembg
-TELEGRAM_BOT_DB_USERNAME=rembg_user
-TELEGRAM_BOT_DB_PASSWORD=rembg_pass
+TELEGRAM_BOT_DB_USERNAME=remuser
+TELEGRAM_BOT_DB_PASSWORD=rempass
 TELEGRAM_BOT_DB_DIALECT=mariadb
 
 # Database settings
 MYSQL_ROOT_PASSWORD=root_pass
 MYSQL_ROOT_HOST=%
 MYSQL_DATABASE=rembg
-MYSQL_USER=rembg_user
-MYSQL_PASSWORD=rembg_pass
+MYSQL_USER=remuser
+MYSQL_PASSWORD=rempass
 ```
 
 You need to set at least `TELEGRAM_BOT_TOKEN`, all other settings can use default values.

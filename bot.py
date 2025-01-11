@@ -18,7 +18,7 @@ DB_SETTINGS = {
     "dbname": os.getenv("TELEGRAM_BOT_DB_DBNAME", "rembg"),
     "username": os.getenv("TELEGRAM_BOT_DB_USERNAME", "remuser"),
     "password": os.getenv("TELEGRAM_BOT_DB_PASSWORD", "rempass"),
-    "host": os.getenv("TELEGRAM_BOT_DB_HOSTNAME", "localhost"),
+    "host": os.getenv("TELEGRAM_BOT_DB_HOSTNAME", "mariadb"),
     "port": os.getenv("TELEGRAM_BOT_DB_PORT", "3306"),
     "dialect": os.getenv("TELEGRAM_BOT_DB_DIALECT", "mariadb"),
 }
