@@ -1,8 +1,9 @@
 import os
 import asyncio
+import datetime
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, Column, Integer, String, Boolean
-from sqlalchemy.orm import sessionmaker, DeclarativeBase, Session
+from sqlalchemy import create_engine, Column, BigInteger, Integer, String, Boolean, DateTime, func
+from sqlalchemy.orm import DeclarativeBase, Session
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message, BufferedInputFile
@@ -41,10 +42,12 @@ class UserModel(Base):
     Users table schema
     """
     __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
-    chat_id = Column(String(64), unique=True, nullable=False)
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    chat_id = Column(String(255), unique=True, nullable=False)
     processed = Column(Integer, default=0)
     is_active = Column(Boolean, default=True)
+    createdAt = Column(DateTime, default=func.now(), nullable=False)
+    updatedAt = Column(DateTime, default=func.now(), onupdate=func.now(), nullable=False)
 
 
 # Build database schema
@@ -86,7 +89,9 @@ async def start_command(message: Message):
     if not user:
         user = UserModel(chat_id=str(chat_id))
         session.add(user)
-        session.commit()
+    else:
+        user.updated_at = datetime.datetime.now(datetime.UTC)
+    session.commit()
     await message.answer("Привет! Этот бот удаляет фон у изображений. Просто отправь картинку!")
 
 
@@ -111,7 +116,8 @@ async def handle_image(message: Message):
     if not user:
         user = UserModel(chat_id=str(chat_id))
         session.add(user)
-        session.commit()
+    else:
+        user.updated_at = datetime.datetime.now(datetime.UTC)
 
     file_id = message.photo[-1].file_id if message.photo else message.document.file_id
 
