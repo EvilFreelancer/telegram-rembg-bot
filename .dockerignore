@@ -1,0 +1,7 @@
+/.git/
+/.idea/
+/venv/
+/.env
+/rembg_data/
+/mariadb_data/
+/docker-compose.yml

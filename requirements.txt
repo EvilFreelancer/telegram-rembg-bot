@@ -1,0 +1,5 @@
+aiogram~=3.17.0
+aiohttp~=3.11.11
+SQLAlchemy~=2.0.37
+mysqlclient~=2.2.7
+python-dotenv~=1.0.1
