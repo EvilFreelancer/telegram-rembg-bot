@@ -8,7 +8,7 @@ services:
     volumes:
       - ./rembg_data:/root/.u2net
     ports:
-      - "127.0.0.1:5000:5000"
+      - "127.0.0.1:7000:7000"
     logging:
       driver: "json-file"
       options:
@@ -17,8 +17,8 @@ services:
   rembg-bot:
     restart: "unless-stopped"
     build: .
-    environment:
-      TELEGRAM_BOT_TOKEN: xxx
+    env_file:
+      - .env
     volumes:
       - .:/app
     depends_on:
