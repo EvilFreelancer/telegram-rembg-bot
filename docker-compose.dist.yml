@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     image: danielgatis/rembg:latest
     command:
-      - s --host 0.0.0.0 --port 7000 --log_level info
+      - s
     volumes:
       - ./rembg_data:/root/.u2net
     ports:
