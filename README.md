@@ -59,7 +59,7 @@ You need to set at least `TELEGRAM_BOT_TOKEN`, all other settings can use defaul
 Start the services using Docker Compose:
 
 ```shell
-docker-compose up -d
+docker compose up -d
 ```
 
 The bot is now running and connected to the rembg API.
